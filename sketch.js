@@ -1,16 +1,16 @@
 function setup() {
-  createCanvas(800, 800);
+  createCanvas(400, 400);
   var generators = [];
 
   for (var i = 0; i < 30; i++) {
-    var color = [parseInt(Math.random() * 180 + 30), parseInt(Math.random() * 180 + 30), parseInt(Math.random() * 180 + 30)];
-    var pos = [parseInt(Math.random() * 800), parseInt(Math.random() * 800)];
+    var color = [parseInt(Math.random() * 180 + 30), parseInt(Math.random() * 40 + 10), parseInt(Math.random() * 180 + 30)];
+    var pos = [parseInt(Math.random() * 400), parseInt(Math.random() * 400)];
     var comb = [pos, color];
     generators.push(comb);
   }
 
-  for (var i = 0; i < 800; i++) {
-    for (var j = 0; j < 800; j++) {
+  for (var i = 0; i < 400; i++) {
+    for (var j = 0; j < 400; j++) {
       var min = 0;
       var dist_min = distance(j, generators[0][0][0], i, generators[0][0][1]);
       for (var iter = 0; iter < generators.length; iter++) {

@@ -1,2 +1,2 @@
-# field-generation
-A field generation app made at the Carleton Dev Club
+# Voronoi Generator
+A simple Voronoi generator that makes use of P5.js.
