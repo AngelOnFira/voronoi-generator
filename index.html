@@ -18,20 +18,32 @@
                 vertical-align: top;
             }
             #displayContainer {
-                min-height: 100vh;
+                height: 100vh;
                 width: 100%;
                 font-size: 110%;
+                position: relative;
             }
             #canvasContainer canvas {
                 min-height: 100vh;
                 width: 100%;
+            }
+
+            #canvasTitle {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: #fff;
+                font-size: 200%;
+                font-family: 'Lato';
+                text-transform: uppercase;
             }
         </style>
     </head>
     <body>
         <div id='displayContainer'>
             <div id='canvasContainer'>
-
+                <div id='canvasTitle'>Forest Anderson</div>
             </div>
         </div>
 
