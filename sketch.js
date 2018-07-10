@@ -8,7 +8,8 @@ var bEnd = 255;
 
 var clientWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var clientHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-var minDim = Math.min(clientWidth, clientHeight) / 2;
+var minDim = Math.min(clientWidth, clientHeight) / 8;
+minDim = 400;
 
 console.log("THE CLIENT WIDTH IS: " + clientWidth);
 console.log("THE CLIENT HEIGHT IS: " + clientHeight);
@@ -56,8 +57,8 @@ function setup() {
 
     var genLen = generators.length;
 
-  for (var y = 0; y < ySize; y++) {
-    for (var x = 0; x < xSize; x++) {
+  for (var y = 0; y < ySize; y+=5) {
+    for (var x = 0; x < xSize; x+=5) {
       var min = 0;
       var dist_min = distance(x, generatorStart, y, generatorEnd);
 
@@ -73,8 +74,9 @@ function setup() {
       }
 
       var targetGen = generators[min][1];
-      canvasLarge.stroke(targetGen[0], targetGen[1], targetGen[2]);
-      canvasLarge.point(j, i);
+      canvasLarge.stroke(targetGen[0]+20, targetGen[1]+20, targetGen[2]+20);
+      canvasLarge.fill(targetGen[0], targetGen[1], targetGen[2]);
+      canvasLarge.rect(x, y, 5, 5);
     }
   }
 }
