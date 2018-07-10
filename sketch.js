@@ -1,12 +1,17 @@
-var rStart = 206;
-var gStart = 15;
-var bStart = 105;
+// var rStart = 206;
+// var gStart = 15;
+// var bStart = 105;
 
-var rEnd = 255;
-var gEnd = 255;
-var bEnd = 255;
+var rStart = 240;
+var gStart = 78;
+var bStart = 152;
+
+var rEnd = 206;
+var gEnd = 15;
+var bEnd = 105;
 
 var squareSize = 20;
+var borderColor = 8;
 
 var clientWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var clientHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -81,7 +86,7 @@ function setup() {
       }
 
       var targetGen = generators[min][1];
-      canvasLarge.stroke(targetGen[0]+10, targetGen[1]+10, targetGen[2]+10);
+      canvasLarge.stroke(targetGen[0]+borderColor, targetGen[1]+borderColor, targetGen[2]+borderColor);
       canvasLarge.fill(targetGen[0], targetGen[1], targetGen[2]);
       canvasLarge.rect(x, y, squareSize, squareSize);
     }
@@ -100,7 +105,7 @@ function getColor(start, end, constRandom, y, ySize) {
   var heightCalc = (y / ySize);
   var colorPartial = 0;
   
-  if (heightCalc > 0.9) colorPartial = 255; else colorPartial = start + (end - start) * heightCalc;
+  if (heightCalc > 4) colorPartial = 255; else colorPartial = start + (end - start) * heightCalc;
   var returnCalc = Math.max(colorPartial, 0);
   return returnCalc;
 }
