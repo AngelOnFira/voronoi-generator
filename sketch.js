@@ -2,9 +2,9 @@
 // var gStart = 15;
 // var bStart = 105;
 
-var rStart = 240;
-var gStart = 78;
-var bStart = 152;
+var rStart = 245;
+var gStart = 126;
+var bStart = 182;
 
 var rEnd = 206;
 var gEnd = 15;
@@ -65,8 +65,8 @@ function setup() {
     var genLen = generators.length;
 
 
-    var baseSquareSize = 10;
-    var addedSquareSize = 60;
+    var baseSquareSize = 4;
+    var addedSquareSize = 4;
   for (var y = 0; y < ySize; y+=squareSize) {
     squareSize = baseSquareSize + (1 - (y / ySize)) * addedSquareSize;
 
@@ -106,6 +106,6 @@ function getColor(start, end, constRandom, y, ySize) {
   var colorPartial = 0;
   
   if (heightCalc > 4) colorPartial = 255; else colorPartial = start + (end - start) * heightCalc;
-  var returnCalc = Math.max(colorPartial, 0);
+  var returnCalc = Math.max(colorPartial + constRandom * 0.05, 0);
   return returnCalc;
 }
