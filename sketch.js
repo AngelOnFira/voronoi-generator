@@ -59,7 +59,12 @@ function setup() {
 
     var genLen = generators.length;
 
+
+    var baseSquareSize = 10;
+    var addedSquareSize = 60;
   for (var y = 0; y < ySize; y+=squareSize) {
+    squareSize = baseSquareSize + (1 - (y / ySize)) * addedSquareSize;
+
     for (var x = 0; x < xSize; x+=squareSize) {
       var min = 0;
       var dist_min = distance(x, generatorStart, y, generatorEnd);
