@@ -17,6 +17,12 @@
         
                 vertical-align: top;
             }
+            .center-s {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
             #displayContainer {
                 height: 100vh;
                 width: 100%;
@@ -28,22 +34,28 @@
                 width: 100%;
             }
 
-            #canvasTitle {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+            #canvasText {
                 color: #fff;
-                font-size: 200%;
                 font-family: 'Lato';
+                text-align: center;
+            }
+            #canvasTitle {
+                font-size: 400%;
+                font-weight: 600;
                 text-transform: uppercase;
+            }
+            #canvasSubtitle {
+                font-size: 140%;
             }
         </style>
     </head>
     <body>
         <div id='displayContainer'>
             <div id='canvasContainer'>
-                <div id='canvasTitle'>Forest Anderson</div>
+                <div class='center-s' id ='canvasText'>
+                    <div id='canvasTitle'>Forest Anderson</div>
+                    <div id='canvasSubtitle'>Game and Software Developer</div>
+                </div>
             </div>
         </div>
 

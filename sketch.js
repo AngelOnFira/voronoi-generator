@@ -2,21 +2,25 @@
 // var gStart = 15;
 // var bStart = 105;
 
-var rStart = 245;
-var gStart = 126;
-var bStart = 182;
+var rStart = 89;
+var gStart = 203;
+var bStart = 232;
 
-var rEnd = 206;
-var gEnd = 15;
-var bEnd = 105;
+var rEnd = 0;
+var gEnd = 107;
+var bEnd = 166;
+
 
 var squareSize = 20;
+var baseSquareSize = 4;
+var addedSquareSize = 4;
+
 var borderColor = 8;
 
 var clientWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 var clientHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-var minDim = Math.min(clientWidth, clientHeight) / 8;
-minDim = 800;
+var minDim = Math.min(clientWidth, clientHeight);
+// minDim = 50;
 
 console.log("THE CLIENT WIDTH IS: " + clientWidth);
 console.log("THE CLIENT HEIGHT IS: " + clientHeight);
@@ -65,8 +69,6 @@ function setup() {
     var genLen = generators.length;
 
 
-    var baseSquareSize = 4;
-    var addedSquareSize = 4;
   for (var y = 0; y < ySize; y+=squareSize) {
     squareSize = baseSquareSize + (1 - (y / ySize)) * addedSquareSize;
 
@@ -106,6 +108,7 @@ function getColor(start, end, constRandom, y, ySize) {
   var colorPartial = 0;
   
   if (heightCalc > 4) colorPartial = 255; else colorPartial = start + (end - start) * heightCalc;
-  var returnCalc = Math.max(colorPartial + constRandom * 0.05, 0);
+  var returnCalc = Math.max(colorPartial, 0);
+  //var returnCalc = Math.max(colorPartial + constRandom * 0.05, 0);
   return returnCalc;
 }
