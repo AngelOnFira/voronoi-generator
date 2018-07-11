@@ -1,21 +1,357 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Field Generation</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.js"></script>
-        <script src="sketch.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        
-    </body>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Field Generation</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    *,
+    html {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+        vertical-align: top;
+        line-height: 1.2;
+        letter-spacing: 0.03em;
+        font-family: 'Lato';
+    }
+
+    .center-s {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #displayContainer {
+        height: 100vh;
+        width: 100%;
+        font-size: 110%;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(to bottom, #AF272F, #000);
+        /* background: linear-gradient(to bottom, #fff, #fff); */
+    }
+
+    #canvasContainer {
+        height: 100%;
+    }
+    #canvasContainer canvas {
+        height: 100%;
+        width: 100%;
+        background: transparent;
+    }
+
+
+
+    #canvasText {
+        color: #fff;
+        font-size: 200%;
+        width: 100%;
+        text-align: center;
+        padding: 0 40px;
+
+        top: 48%;
+        text-shadow: 1px 1px #eee;
+    }
+
+    #canvasTitle {
+        font-size: 200%;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+
+    .pageContent {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    /* ABOUT SECTION */
+
+    #aboutContainer {
+        padding: 80px 0;
+        background: #000;
+    }
+
+    #aboutContent {
+        max-width: 920px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    #aboutLeft {
+        width: 320px;
+        height: 320px;
+        border: 2px solid #AF272F;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+
+    #aboutLeft img {
+        width: 100%;
+        height: auto;
+    }
+
+    #aboutRight {
+        flex: 1;
+        font-size: 110%;
+        padding: 0 40px;
+    }
+
+    #aboutTitle {
+        font-size: 100%;
+        margin-bottom: 10px;
+        color: #AF272F;
+    }
+
+    #aboutDesc {
+        line-height: 1.4;
+        color: #fff;
+    }
+    /* WORK CONTAINER */
+
+    #workContainer {
+        padding: 80px 0;
+    }
+
+    .work {
+        width: 100%;
+        display: flex;
+        margin: 120px 0;
+    }
+
+    .workImg {
+        margin-right: 60px;
+    }
+
+    .workImg img {
+        width: 320px;
+    }
+    /* WORK RIGHT COL */
+
+    .workContent {
+        flex: 1;
+    }
+
+    .workTitle {
+        font-size: 200%;
+        font-weight: 600;
+    }
+
+    .workSubtitle {
+        opacity: 0.8;
+        line-height: 1.6;
+        margin: 5px 0 20px 0;
+    }
+
+    .workLanguages {
+        font-weight: 700;
+    }
+
+    .workList {
+        margin-left: 20px;
+    }
+
+    .workList li {
+        margin: 5px 0;
+    }
+
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+    }
+
+    #navContainer {
+        color: #fff;
+    }
+
+    #navList {
+        list-style-type: none;
+        display: flex;
+        float: right;
+        font-size: 120%;
+        padding: 0 20px;
+    }
+
+    .navOption {
+        margin: 20px;
+    }
+
+    #navSocials {
+        position: fixed;
+        top: 1.5rem;
+        left: 1.5rem;
+    }
+
+    .navSocial {
+        display: block;
+    }
+
+    .navSocial:nth-child(n + 2) {
+        margin-top: 8px;
+    }
+
+    .navSocial>* {
+        width: 1.8rem;
+        height: 1.8rem;
+        fill: #fff;
+    }
+
+    .githubSocial svg {
+        padding: 1px;
+    }
+
+    #canvasContainer {
+
+    }
+
+    #canvasBackground {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        background: linear-gradient(to bottom, #000, #000);
+        opacity: 0.4;
+    }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div id='navContainer'>
+            <div id='navSocials' class='noselect'>
+                <a class='navSocial githubSocial' href='https://github.com/AngelOnFira' target='_blank'>
+                    <div class='svg' src='ic/social-github.svg'></div>
+                </a>
+                <a class='navSocial' href='https://www.linkedin.com/in/forest-anderson/' target='_blank'>
+                    <div class='svg' src='ic/social-linkedin.svg'></div>
+                </a>
+            </div>
+            <ul id='navList'>
+                <li class='navOption'>About</li>
+                <li class='navOption'>Projects</li>
+                <li class='navOption'>Experience</li>
+            </ul>
+        </div>
+    </nav>
+    <section id='displayContainer'>
+        <div id='canvasContainer'>
+            <div id='canvasBackground'></div>
+            <div class='center-s' id='canvasText'>
+                <div id='canvasTitle'>Forest Anderson</div>
+                <div id='canvasSubtitle'>Game and Software Developer</div>
+            </div>
+        </div>
+    </section>
+    <section id='aboutContainer'>
+        <div id='aboutContent' class='pageContent'>
+            <div id='aboutLeft'>
+                <img data-lazysrc='img/profile2.jpg' />
+            </div>
+            <div id='aboutRight'>
+                <div id='aboutTitle'>Summary</div>
+                <div id='aboutDesc'>
+                    I'm a 4th year computer science student at Carleton University, with honours in Game Development. I have done research at Carleton in the field of image processing. I have many sideprojects that I have worked on. Some topics I'm interested in include web scrapers, graphics, and security. 
+                    <br><br>
+                    I co-lead the Lame Jam, a game jam at Carleton University. I co-lead Hack All The Things, an Ottawa-based security competition. I have been an executive member of the Carleton Computer Science Society for four years.
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id='workContainer'>
+        <div id='workContent' class='pageContent'>
+            <div class='work'>
+                <div class='workImg'>
+                    <img data-lazysrc='img/miraclemerchant.jpg' />
+                </div>
+                <div class='workContent'>
+                    <div class='workTitle'>Miracle Merchant AI</div>
+                    <div class='workSubtitle'>Jan 2018 - April 2018</div>
+                    <div class='workLanguages'>Python, Jupyter Notebook, Plotly</div>
+                    <ul class='workList'>
+                        <li>An AI created for the mobile game "Miracle Merchant"</li>
+                        <li>Created in Python with data visualization done using Plotly and Jupyter Notebook</li>
+                        <li>Worked as the backend deveoper on a four-person team</li>
+                    </ul>
+                </div>
+            </div>
+            <div class='work'>
+                <div class='workImg'>
+                    <img data-lazysrc='img/forced-divided.png' />
+                </div>
+                <div class='workContent'>
+                    <div class='workTitle'>Forces Divided</div>
+                    <div class='workSubtitle'>Jan 2018 - April 2018</div>
+                    <div class='workLanguages'>Unity, C#</div>
+                    <ul class='workList'>
+                        <li>An RTS game build in Unity</li>
+                        <li>Worked on game mechanics and managing the 3-person team</li>
+                    </ul>
+                </div>
+            </div>
+            <div class='work'>
+                <div class='workImg'>
+                    <img data-lazysrc='img/cuhlogo.png' />
+                </div>
+                <div class='workContent'>
+                    <div class='workTitle'>CUHacking App</div>
+                    <div class='workSubtitle'>Fall 2017</div>
+                    <div class='workLanguages'>Ruby on Rails, Android Studio, Heroku</div>
+                    <ul class='workList'>
+                        <li>Created for Carleton’s Hackathon. It will help participants navigate around the university as well as stay in contact with the organizers</li>
+                        <li>Created and managed the database, which was built with Ruby On Rails. The database is stored on Heroku</li>
+                        <li>Worked as the backend deveoper on a four-person team</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <noscript id="deferred-styles">
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+    </noscript>
+    <script>
+    var loadDeferredStyles = function() {
+        var addStylesNode = document.getElementById("deferred-styles");
+        var replacement = document.createElement("div");
+        replacement.innerHTML = addStylesNode.textContent;
+        document.body.appendChild(replacement)
+        addStylesNode.parentElement.removeChild(addStylesNode);
+    };
+    var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+    else window.addEventListener('load', loadDeferredStyles);
+
+    [
+        'js/min/imgtosvg.js', //--> Load svgs first
+        'js/min/lazyload.js',
+        'js/p5.js',
+        'js/sketch.js',
+    ].forEach(function(src) {
+        var script = document.createElement('script');
+        script.src = src;
+        script.async = false;
+        document.head.appendChild(script);
+    });
+    </script>
+    <script type="text/javascript" async defer>
+    var adblock = true;
+    </script>
+</body>
+
 </html>
